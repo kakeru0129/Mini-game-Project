@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+//UIを制御するときはこの一行を必ず加える
 
 public class Player : MonoBehaviour
 {
@@ -11,6 +13,8 @@ public class Player : MonoBehaviour
     public float speed;
     int count;
     //今回は個数で必ず整数になるので『int型』を使う
+    public Text countText;
+    //Text型の変数『countText』の宣言
 
     // Start is called before the first frame update
     //void Startやvoid UpdateはMethod(メソッド)という
@@ -22,6 +26,11 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         count = 0;
         //初期値は0
+        SetCountText();
+        //countText.text = "ゲット数:" + count.ToString();
+        //count.ToString();を入力することによって左右の型が揃って代入できるようになる
+        //int型の『数値』→string型の『文字(数字)』に変換するメソッド
+        //"ゲット数:" + でUIの表示を『ゲット数:◯』とし、＋で前後の文字列を連結できる
     }
 
     // Update is called once per frameの戻り値
@@ -53,6 +62,13 @@ public class Player : MonoBehaviour
 
         count = count + 1;
         //『今のcountの値に1を足してそれを新しいcountの値にしなさい』という意味で『count += 1』と書いてもいい
-        Debug.Log(count);
+        SetCountText();
+        //countText.text = "ゲット数:" + count.ToString();
+    }
+
+    void SetCountText()
+    //voidのStartとOnTriggerEnterの記述が同じためオリジナルメソッドを作る
+    {
+        countText.text = "ゲット数:" + count.ToString();
     }
 }
